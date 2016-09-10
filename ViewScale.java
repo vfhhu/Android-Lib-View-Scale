@@ -11,10 +11,13 @@ import android.widget.TextView;
  */
 public class ViewScale {
     private Activity act;
+    private float LayoutDesignWidth=360f;
+
     private float scale=1f;
     private float density=3f;
     private float dpHeight=100f;
     private float dpWidth=100f;
+    private boolean isScale=false;
     public ViewScale(Activity act){
         this.act=act;
         Display display = act.getWindowManager().getDefaultDisplay();
@@ -24,7 +27,7 @@ public class ViewScale {
         density  = act.getResources().getDisplayMetrics().density;
         dpHeight = outMetrics.heightPixels / density;
         dpWidth  = outMetrics.widthPixels / density;
-        scale=dpWidth/480;
+        scale=dpWidth/LayoutDesignWidth;
     }
 
     public void ReDrawImageView(int id){
@@ -67,5 +70,13 @@ public class ViewScale {
         v.setTextSize(TypedValue.COMPLEX_UNIT_PX, v.getTextSize() * scale);
         int pl=(int)(v.getPaddingLeft()*scale);
         v.setPadding(pl,v.getPaddingTop(),v.getPaddingRight(),v.getPaddingBottom());
+    }
+
+    public boolean isScale() {
+        return isScale;
+    }
+
+    public void setIsScale(boolean isScale) {
+        this.isScale = isScale;
     }
 }
